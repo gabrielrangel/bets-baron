@@ -8,6 +8,16 @@ img {
     max-width: 100%;
 }
 
+button {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    transition: 1s;
+    font-size: .8rem;
+    font-family: 'Poppins', sans-serif;
+}
+
 .wrapper {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
@@ -25,16 +35,12 @@ header {
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
-    max-height: 90px;
+    height: 90px;
     grid-area: header;
     display: flex;
     align-content: center;
     border-bottom: solid 1px black;
     padding: 10px;
-}
-
-header img {
-    width: 10%;
 }
 
 header > strong {
@@ -45,14 +51,14 @@ header > strong {
     align-self: center;
 }
 
-
 main {
     padding: 0 10px;
     width: 100vw;
     grid-area: main;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    align-items: center;
 }
 
 .event-card {
@@ -91,6 +97,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-width: 400px;
+    max-width: 500px;
 }
 
 .market + .market {
@@ -122,7 +130,7 @@ footer {
 
 .layer1 {
     z-index: 1;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0,0,0,.5);
     content: '';
     height: 100%;
     grid-row-start: 1;
@@ -134,7 +142,7 @@ footer {
 
 .slip-view {
     content: '';
-    height: 100vh;
+    height: 100%;
     background-color: white;
     border-left: 5px solid black;
     display: flex;
@@ -151,9 +159,30 @@ footer {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
-    max-height: 90px;
+    height: 90px;
 }
 
 .slip-view-header img {
     width: 10%;
+}
+
+.slip-view form {
+    flex-grow: 1;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.slip-view form .product-list {
+    content: '';
+    flex-grow: 1;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+@media (min-width: 1000px) {
 }
