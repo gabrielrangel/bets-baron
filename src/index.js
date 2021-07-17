@@ -1,4 +1,4 @@
-import {EventCard} from "./Components/EventCard.js";
+import {EventCard} from "./components/EventCard.js";
 
 fetch('https://www.mocky.io/v2/59f08692310000b4130e9f71')
     .then((res) => res.json())

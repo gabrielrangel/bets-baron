@@ -28,7 +28,5 @@ export function Market ({name, selections}){
         ))
     })
 
-
-
     return market
 }
