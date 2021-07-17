@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    display: flex;
+    border-bottom: solid 1px black;
+    padding: 10px;
+}
+
+main {
+    padding: 10px;
+    width: 100vw;
+}
+
+.card {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.card + .card {
+    margin-top: 10px;
+}
