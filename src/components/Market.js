@@ -1,6 +1,8 @@
-export function Market ({name, selections}){
+export function Market ({game, name, selections}){
     const market = document.createElement('div')
     market.classList.add('market')
+    market.dataset.game = game
+    market.dataset.market = name
 
     market.appendChild( Object.assign(
         document.createElement('p'),
@@ -20,10 +22,10 @@ export function Market ({name, selections}){
         selectionsArea.appendChild( Object.assign(
             document.createElement('button'),
             {
-                innerHTML: `
-                    <div>${name}</div>
-                    <div>${price}</div>
-                `
+                innerHTML:
+                    `<div>${name}</div>
+                    <div>${price}</div>`,
+                value: JSON.stringify({name, price})
             }
         ))
     })

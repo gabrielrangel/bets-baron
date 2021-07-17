@@ -1,4 +1,5 @@
 import {EventCard} from "./components/EventCard.js";
+import {ProductCard} from "./components/ProductCard.js";
 
 function slipViewToggle () {
     const layer1 = document.querySelector('.layer1')
@@ -7,7 +8,6 @@ function slipViewToggle () {
 }
 
 function handleCheckout (e) {
-    console.log('checkout')
     e.preventDefault()
 }
 
@@ -16,7 +16,29 @@ function handleBetButtonClick (e) {
     const button = isButton ? e.target : e.target.parentNode
 
     const isClicked = button.classList.contains('green')
+
+    isClicked || Array.from(button.parentNode.children).forEach(button => button.classList.remove('green'))
     isClicked ? button.classList.remove('green') : button.classList.add('green')
+
+    renderSlipView()
+}
+
+function renderSlipView () {
+    const productList = document.querySelector('.product-list')
+
+    Array.from(productList.children).forEach(card => {
+        card.remove()
+    })
+
+    document.querySelectorAll('.selections-area .green')
+        .forEach((button)=>{
+            productList.appendChild(
+                ProductCard({
+                    ...button.parentNode.parentNode.dataset,
+                    ...JSON.parse(button.value)
+                })
+            )
+        })
 }
 
 document.querySelectorAll('.slip-view-toggle').forEach(toggle => {
@@ -24,6 +46,7 @@ document.querySelectorAll('.slip-view-toggle').forEach(toggle => {
 })
 
 document.querySelector('#checkout').addEventListener('submit', handleCheckout)
+
 
 fetch('https://www.mocky.io/v2/59f08692310000b4130e9f71')
     .then((res) => res.json())

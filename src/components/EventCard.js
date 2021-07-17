@@ -13,12 +13,12 @@ export function EventCard ({name, markets}) {
             innerHTML:
                 `<p>${teamA}</p>
                 <p>vs</p>
-                <p>${teamB}</p>`
+                <p>${teamB}</p>`,
         }
     ) )
 
     markets.forEach(marketData => {
-        card.appendChild(Market(marketData))
+        card.appendChild(Market({game:name, ...marketData}))
     })
 
     return card

@@ -10,7 +10,7 @@ img {
 
 button {
     background-color: transparent;
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 8px;
     padding: 10px;
     transition: 1s;
@@ -144,7 +144,7 @@ footer {
     content: '';
     height: 100%;
     background-color: white;
-    border-left: 5px solid black;
+    border-left: 3px solid black;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -174,12 +174,32 @@ footer {
     gap: 10px;
 }
 
-.slip-view form .product-list {
+.product-list {
     content: '';
     flex-grow: 1;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 
+.product-list li {
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+    gap: 20px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+}
+
+.product-list strong{
+    font-size: 2rem;
+}
+
+
 .green {
+    border: 2px solid green;
     background-color: green;
     color: white;
 }
