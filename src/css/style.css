@@ -1,6 +1,6 @@
 * {
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
     box-sizing: border-box;
 }
 
@@ -12,6 +12,14 @@ header {
     display: flex;
     border-bottom: solid 1px black;
     padding: 10px;
+    gap: 10px;
+}
+
+header > strong {
+    flex-grow: 1;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    align-self: center;
 }
 
 main {
@@ -19,12 +27,57 @@ main {
     width: 100vw;
 }
 
-.card {
-    padding: 10px;
+.event-card {
     border: 1px solid black;
     border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.card + .card {
+.event-card > * {
+    padding: 10px;
+}
+
+.event-card + .event-card {
     margin-top: 10px;
+}
+
+.event-name {
+    display: flex;
+    border-bottom: 1px solid black;
+
+}
+
+.event-name p {
+    text-align: center;
+}
+
+.event-name p:first-child,
+.event-name p:last-child {
+    flex-grow: 2;
+    max-width: 40%;
+}
+
+.event-name p:nth-child(2){
+    flex-grow: 1;
+}
+
+.market {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.market + .market {
+    border-top: 1px solid black;
+}
+
+.selections-area {
+    display: flex;
+    gap: 10px;
+}
+
+.selections-area > button {
+    flex-grow: 1;
 }
