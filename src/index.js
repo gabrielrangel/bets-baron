@@ -4,7 +4,7 @@ import {ProductCard} from "./components/ProductCard.js";
 function slipViewToggle () {
     const layer1 = document.querySelector('.layer1')
     const display = layer1.style.display === 'none'
-    layer1.style.display = !display ? 'none' : 'block'
+    layer1.style.display = !display ? 'none' : 'flex'
 }
 
 function handleCheckout (e) {
@@ -39,6 +39,17 @@ function renderSlipView () {
                 })
             )
         })
+}
+
+window.onscroll = () => {
+    if (document.documentElement.scrollTop > 20) {
+        document.querySelector('header').classList.add('fixed')
+        document.querySelector('main').classList.add('fixed')
+    } else {
+        document.querySelector('header').classList.remove('fixed')
+        document.querySelector('main').classList.remove('fixed')
+    }
+
 }
 
 document.querySelectorAll('.slip-view-toggle').forEach(toggle => {

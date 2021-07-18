@@ -5,15 +5,17 @@ export function EventCard ({name, markets}) {
 
     const card = document.createElement('div')
     card.classList.add('event-card')
+    card.classList.add('grey-hover')
+
 
     card.appendChild( Object.assign(
         document.createElement('div'),
         {
             className:'event-name',
-            innerHTML:
-                `<p>${teamA}</p>
-                <p>vs</p>
-                <p>${teamB}</p>`,
+            innerHTML: name
+                // `<p>${teamA}</p>
+                // <p>vs</p>
+                // <p>${teamB}</p>`,
         }
     ) )
 
