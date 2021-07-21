@@ -1,0 +1,16 @@
+.market {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 600;
+    flex-grow: 2;
+}
+
+.selections-area {
+    display: flex;
+    gap: 10px;
+}
+
+.selections-area > button {
+    flex-grow: 1;
+}

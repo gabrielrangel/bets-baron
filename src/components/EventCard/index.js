@@ -1,6 +1,7 @@
-import {Market} from "./Market.js";
+import {Market} from "../Market";
+import './style.css'
 
-export function EventCard ({name, markets}) {
+export function EventCard ({name, markets}, callback) {
     const [teamA, teamB] = name.split(' vs ')
 
     const card = document.createElement('div')
@@ -13,14 +14,11 @@ export function EventCard ({name, markets}) {
         {
             className:'event-name',
             innerHTML: name
-                // `<p>${teamA}</p>
-                // <p>vs</p>
-                // <p>${teamB}</p>`,
         }
     ) )
 
     markets.forEach(marketData => {
-        card.appendChild(Market({game:name, ...marketData}))
+        card.appendChild(Market({game:name, ...marketData}, callback))
     })
 
     return card

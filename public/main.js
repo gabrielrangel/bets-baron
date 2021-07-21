@@ -2,9 +2,24 @@
 /******/ 	"use strict";
 var __webpack_exports__ = {};
 
-;// CONCATENATED MODULE: ./src/components/Market.js
-function Market ({game, name, selections}){
+;// CONCATENATED MODULE: ./src/components/Market/index.js
+
+
+function Market ({game, name, selections}, callback){
+    const handleBetButtonClick = (e) => {
+        const isButton = e.target.tagName === 'BUTTON'
+        const button = isButton ? e.target : e.target.parentNode
+
+        const isClicked = button.classList.contains('green')
+
+        isClicked || Array.from(button.parentNode.children).forEach(button => button.classList.remove('green'))
+        isClicked ? button.classList.remove('green') : button.classList.add('green')
+
+        callback()
+    }
+
     const market = document.createElement('div')
+
     market.classList.add('market')
     market.dataset.game = game
     market.dataset.market = name
@@ -30,7 +45,8 @@ function Market ({game, name, selections}){
                 innerHTML:
                     `<div>${name}</div>
                     <div>${price}</div>`,
-                value: JSON.stringify({name, price})
+                value: JSON.stringify({name, price}),
+                onclick: handleBetButtonClick
             }
         ))
     })
@@ -38,10 +54,11 @@ function Market ({game, name, selections}){
     return market
 }
 
-;// CONCATENATED MODULE: ./src/components/EventCard.js
+;// CONCATENATED MODULE: ./src/components/EventCard/index.js
 
 
-function EventCard ({name, markets}) {
+
+function EventCard ({name, markets}, callback) {
     const [teamA, teamB] = name.split(' vs ')
 
     const card = document.createElement('div')
@@ -54,76 +71,73 @@ function EventCard ({name, markets}) {
         {
             className:'event-name',
             innerHTML: name
-                // `<p>${teamA}</p>
-                // <p>vs</p>
-                // <p>${teamB}</p>`,
         }
     ) )
 
     markets.forEach(marketData => {
-        card.appendChild(Market({game:name, ...marketData}))
+        card.appendChild(Market({game:name, ...marketData}, callback))
     })
 
     return card
 }
 
-;// CONCATENATED MODULE: ./src/components/ProductCard.js
-function ProductCard (productData) {
-    return Object.assign(
-        document.createElement('li'),
+;// CONCATENATED MODULE: ./src/components/Checkout/index.js
+
+
+function Checkout(){
+    const productList = document.querySelector('.product-list')
+    const wrapper = document.querySelector('.checkout-wrapper')
+
+    const ProductCard  = (productData) => Object.assign(
+        document.createElement('output'),
         {
             className: 'product-card grey-hover',
             innerHTML:
                 `<strong>${productData.name} to ${productData.market.split(" to ")[1]}</strong>
-                 <p>${productData.price}</p>`
+             <p>${productData.price}</p>`
         }
     )
+
+    const handleCheckout = (e) => {
+        e.preventDefault()
+    }
+
+    const slipViewToggle = () => {
+        const display = wrapper.style.display === 'none'
+        wrapper.style.display = !display ? 'none' : 'flex'
+    }
+
+
+    this.list = () => Array.from(productList.children)
+
+    this.render = () => {
+        this.list().forEach(card => {
+            card.remove()
+        })
+
+        document.querySelectorAll('.selections-area .green')
+            .forEach((button)=>{
+                productList.appendChild(
+                    ProductCard({
+                        ...button.parentNode.parentNode.dataset,
+                        ...JSON.parse(button.value)
+                    })
+                )
+            })
+    }
+
+    document.querySelector('#checkout').addEventListener('submit', handleCheckout)
+
+    document.querySelectorAll('.slip-view-toggle').forEach(toggle => {
+        toggle.addEventListener('click', slipViewToggle)
+    })
 }
+
 ;// CONCATENATED MODULE: ./src/index.js
 
 
 
 
-
-function slipViewToggle () {
-    const layer1 = document.querySelector('.layer1')
-    const display = layer1.style.display === 'none'
-    layer1.style.display = !display ? 'none' : 'flex'
-}
-
-function handleCheckout (e) {
-    e.preventDefault()
-}
-
-function handleBetButtonClick (e) {
-    const isButton = e.target.tagName === 'BUTTON'
-    const button = isButton ? e.target : e.target.parentNode
-
-    const isClicked = button.classList.contains('green')
-
-    isClicked || Array.from(button.parentNode.children).forEach(button => button.classList.remove('green'))
-    isClicked ? button.classList.remove('green') : button.classList.add('green')
-
-    renderSlipView()
-}
-
-function renderSlipView () {
-    const productList = document.querySelector('.product-list')
-
-    Array.from(productList.children).forEach(card => {
-        card.remove()
-    })
-
-    document.querySelectorAll('.selections-area .green')
-        .forEach((button)=>{
-            productList.appendChild(
-                ProductCard({
-                    ...button.parentNode.parentNode.dataset,
-                    ...JSON.parse(button.value)
-                })
-            )
-        })
-}
 
 window.onscroll = () => {
     if (document.documentElement.scrollTop > 20) {
@@ -136,24 +150,14 @@ window.onscroll = () => {
 
 }
 
-document.querySelectorAll('.slip-view-toggle').forEach(toggle => {
-    toggle.addEventListener('click', slipViewToggle)
-})
-
-document.querySelector('#checkout').addEventListener('submit', handleCheckout)
-
-
 fetch('https://www.mocky.io/v2/59f08692310000b4130e9f71')
     .then((res) => res.json())
     .then((data) => {
         const main = document.querySelector('main')
+        const checkout = new Checkout()
 
-        data.forEach((event) => {
-            event.markets.length > 0 && main.appendChild(EventCard(event))
-        })
-
-        document.querySelectorAll('.event-card button').forEach(betButton => {
-            betButton.addEventListener('click', handleBetButtonClick)
+        data.forEach(({markets, ...event}) => {
+            markets.length > 0 && main.appendChild(EventCard({markets, ...event}, checkout.render))
         })
     })
 

@@ -1,5 +1,20 @@
-export function Market ({game, name, selections}){
+import './style.css'
+
+export function Market ({game, name, selections}, callback){
+    const handleBetButtonClick = (e) => {
+        const isButton = e.target.tagName === 'BUTTON'
+        const button = isButton ? e.target : e.target.parentNode
+
+        const isClicked = button.classList.contains('green')
+
+        isClicked || Array.from(button.parentNode.children).forEach(button => button.classList.remove('green'))
+        isClicked ? button.classList.remove('green') : button.classList.add('green')
+
+        callback()
+    }
+
     const market = document.createElement('div')
+
     market.classList.add('market')
     market.dataset.game = game
     market.dataset.market = name
@@ -25,7 +40,8 @@ export function Market ({game, name, selections}){
                 innerHTML:
                     `<div>${name}</div>
                     <div>${price}</div>`,
-                value: JSON.stringify({name, price})
+                value: JSON.stringify({name, price}),
+                onclick: handleBetButtonClick
             }
         ))
     })
