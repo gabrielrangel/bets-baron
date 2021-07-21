@@ -1,0 +1,33 @@
+{
+  "name": "bets-baron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "css-loader": "6.2.0",
+    "mini-css-extract-plugin": "2.1.0",
+    "optimize-css-assets-webpack-plugin": "6.0.1",
+    "style-loader": "3.2.1",
+    "webpack": "5.45.1",
+    "webpack-cli": "4.7.2"
+  },
+  "scripts": {
+    "start": "webpack",
+    "build": "cross-env NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielrangel/bets-baron.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielrangel/bets-baron/issues"
+  },
+  "homepage": "https://github.com/gabrielrangel/bets-baron#readme",
+  "dependencies": {
+    "webpack-dev-server": "^3.11.2"
+  }
+}
