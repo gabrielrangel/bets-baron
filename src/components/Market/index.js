@@ -1,6 +1,6 @@
 import './style.css'
 
-export function Market ({game, name, selections}, callback){
+export function Market ({eventID, id:marketID, name:marketName, selections}, callback){
     const handleBetButtonClick = (e) => {
         const isButton = e.target.tagName === 'BUTTON'
         const button = isButton ? e.target : e.target.parentNode
@@ -16,13 +16,12 @@ export function Market ({game, name, selections}, callback){
     const market = document.createElement('div')
 
     market.classList.add('market')
-    market.dataset.game = game
-    market.dataset.market = name
+    market.dataset.market = marketName
 
     market.appendChild( Object.assign(
         document.createElement('p'),
         {
-            innerHTML: name
+            innerHTML: marketName
         }
     ))
 
@@ -33,15 +32,14 @@ export function Market ({game, name, selections}, callback){
         }
     ))
 
-    selections.forEach(({name, price}) => {
+    selections.forEach(({id:selectionID, name:selectionName, price}) => {
+        const desc = `${selectionName} to ${marketName.split(' to ')[1]}`
         selectionsArea.appendChild( Object.assign(
             document.createElement('button'),
             {
-                innerHTML:
-                    `<div>${name}</div>
-                    <div>${price}</div>`,
-                value: JSON.stringify({name, price}),
-                onclick: handleBetButtonClick
+                innerHTML: `<div>${selectionName}</div> <div>${price}</div>`,
+                value: JSON.stringify({eventID, marketID, selectionID, desc}),
+                onclick: handleBetButtonClick,
             }
         ))
     })

@@ -60,12 +60,11 @@ header.fixed{
 }
 
 main {
-    padding: 0 10px;
     grid-area: main;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 50px;
+    padding: 0 10%;
 }
 
 main.fixed {
